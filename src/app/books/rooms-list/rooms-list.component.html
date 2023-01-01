@@ -1,0 +1,25 @@
+
+
+<h1>{{title}}</h1>
+<table>
+    <tr>
+        <th>Room Numbers</th>
+        <th>Room Types</th>
+        <th>Amentities</th>
+        <th>Price</th>
+        <th>check in time</th>
+        <th>Selected Room</th>
+    </tr>
+    <tr *ngFor="let room of rooms">
+      <td>{{room.roomNumber}}</td>
+      <td>{{room.roomType}}</td>
+      <td>{{room.amenities}}</td>
+      <td>{{room.price | currency : 'EUR'}}</td>
+      <td>{{room.checkinTime | date}}</td>
+      <td>
+        <button (click)="SelectRoom(room)">  
+           Select
+        </button>
+      </td>
+    </tr>
+ </table>   

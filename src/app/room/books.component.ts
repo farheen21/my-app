@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
 import { RoomList, Rooms } from './room';
 
 @Component({
@@ -6,17 +7,18 @@ import { RoomList, Rooms } from './room';
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.css'] ,
 })
-export class BooksComponent {
+export class BooksComponent implements OnInit , AfterViewInit{
 
   hotelName: string = 'France Hotel'
   hideRooms = false;
   numberOfRoom = 10;
   rooms: Rooms = {
     totalRooms: 20,
-    availableRooms: 10,
+    availableRooms: 10, 
     bookedRooms: 5
   }
-
+  
+  
   roomList: RoomList[] = [
     { 
       roomNumber : 51,
@@ -57,10 +59,23 @@ export class BooksComponent {
 
 
   ]
+  
+  @ViewChild(HeaderComponent , {static : true}) headerComponents! :  HeaderComponent ;
+  
+
+  constructor() {}
+  ngAfterViewInit(): void {
+    console.log(this.headerComponents);
+    this.headerComponents.title = 'Farheen is acessing header title'
+  }
+  ngOnInit(): void {
+    console.log(this.headerComponents);
+  }
 
   roomVisible = () => {
     this.hideRooms = !this.hideRooms;
   }
+   
 
   selectRoom(room:RoomList) {
      console.log(room)
